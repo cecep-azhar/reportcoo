@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ReportBuilder.Core.Models;
 using ReportBuilder.Core.Storage;
+using CoreTextAlignment = ReportBuilder.Core.Models.TextAlignment;
 
 namespace ReportBuilder.WinUI.Controls;
 
@@ -112,9 +113,28 @@ public sealed partial class TemplateDesigner : UserControl
 
     private void SectionTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
     {
-    if (args.InvokedItem is TreeViewNode node && node.Tag is string sectionTag)
- {
-            NavigateToPropertyEditor(sectionTag);
+        if (args.InvokedItem is TreeViewNode node && node.Content is string contentStr)
+        {
+            // Map content text to section tag
+            var sectionTag = contentStr switch
+            {
+                "Ukuran Kertas" => "PageSize",
+                "Margin" => "Margins",
+                "Logo Kiri" => "LeftLogo",
+                "Logo Kanan" => "RightLogo",
+                "Teks Header" => "HeaderLines",
+                "Info Pasien" => "InfoFields",
+                "Grid Gambar" => "ImageGrid",
+                "Hasil Pemeriksaan" => "Results",
+                "Tanggal & Lokasi" => "DateLocation",
+                "Tanda Tangan" => "Signature",
+                _ => null
+            };
+            
+            if (sectionTag != null)
+            {
+                NavigateToPropertyEditor(sectionTag);
+            }
         }
     }
 
@@ -301,13 +321,13 @@ IsOn = logo.IsVisible
   addButton.Click += (s, e) =>
         {
         _currentTemplate.Header.Lines.Add(new HeaderLine
-  {
-         Order = _currentTemplate.Header.Lines.Count + 1,
-    Text = "Baris Baru",
+            {
+                Order = _currentTemplate.Header.Lines.Count + 1,
+                Text = "Baris Baru",
                 FontSize = 12,
-      Alignment = TextAlignment.Center,
-           IsVisible = true
-       });
+                Alignment = CoreTextAlignment.Center,
+                IsVisible = true
+            });
             MarkDirty();
             CreateHeaderLinesEditor(panel);
    UpdatePreview();

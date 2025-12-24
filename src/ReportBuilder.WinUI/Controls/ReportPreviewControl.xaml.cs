@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using ReportBuilder.Core.Models;
+using CoreTextAlignment = ReportBuilder.Core.Models.TextAlignment;
 
 namespace ReportBuilder.WinUI.Controls;
 
@@ -171,20 +172,20 @@ PaperSize.FiveR => (360, 504), // 5x7 inches
             var text = ResolveText(line.PlaceholderKey ?? line.Text);
 
             var textBlock = new TextBlock
-         {
-          Text = text,
-            FontSize = line.FontSize,
-     FontWeight = line.IsBold ? Microsoft.UI.Text.FontWeights.Bold : Microsoft.UI.Text.FontWeights.Normal,
-        FontStyle = line.IsItalic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal,
-   TextAlignment = line.Alignment switch
-         {
-TextAlignment.Left => Microsoft.UI.Xaml.TextAlignment.Left,
-              TextAlignment.Right => Microsoft.UI.Xaml.TextAlignment.Right,
-        _ => Microsoft.UI.Xaml.TextAlignment.Center
-       },
+            {
+                Text = text,
+                FontSize = line.FontSize,
+                FontWeight = line.IsBold ? Microsoft.UI.Text.FontWeights.Bold : Microsoft.UI.Text.FontWeights.Normal,
+                FontStyle = line.IsItalic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal,
+                TextAlignment = line.Alignment switch
+                {
+                    CoreTextAlignment.Left => Microsoft.UI.Xaml.TextAlignment.Left,
+                    CoreTextAlignment.Right => Microsoft.UI.Xaml.TextAlignment.Right,
+                    _ => Microsoft.UI.Xaml.TextAlignment.Center
+                },
                 Foreground = new SolidColorBrush(ParseColor(line.FontColor)),
-         Margin = new Thickness(0, line.MarginTop, 0, line.MarginBottom)
-          };
+                Margin = new Thickness(0, line.MarginTop, 0, line.MarginBottom)
+            };
 
   HeaderTextPanel.Children.Add(textBlock);
         }
@@ -263,13 +264,13 @@ TextAlignment.Left => Microsoft.UI.Xaml.TextAlignment.Left,
         border.BorderThickness = new Thickness(grid.BorderThickness);
       }
 
-           var textBlock = new TextBlock
-         {
- Text = $"Gambar {imageIndex}",
-           HorizontalAlignment = HorizontalAlignment.Center,
-         VerticalAlignment = VerticalAlignment.Center,
-         Foreground = new SolidColorBrush(Microsoft.UI.Colors.Gray)
-    };
+                var textBlock = new TextBlock
+                {
+                    Text = $"Gambar {imageIndex}",
+                    HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
+                    VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center,
+                    Foreground = new SolidColorBrush(Microsoft.UI.Colors.Gray)
+                };
 
                 border.Child = textBlock;
 

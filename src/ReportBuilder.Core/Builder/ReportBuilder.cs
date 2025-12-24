@@ -77,11 +77,14 @@ public class ReportBuilder
     private readonly IReportGenerator _generator;
     private readonly ReportData _data;
 
-    internal ReportBuilder(ReportTemplate template, IReportGenerator generator)
+    /// <summary>
+    /// Creates a new ReportBuilder with the specified template and generator.
+    /// </summary>
+    public ReportBuilder(ReportTemplate template, IReportGenerator generator)
     {
-    _template = template;
+        _template = template;
         _generator = generator;
-   _data = new ReportData();
+        _data = new ReportData();
     }
 
     #region Institution Data

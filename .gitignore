@@ -1,0 +1,10 @@
+/samples/ReportBuilder.Demo/bin
+/samples/ReportBuilder.Demo/obj
+/src/ReportBuilder.WinUI/bin
+/src/ReportBuilder.WinUI/obj
+/tests/ReportBuilder.Tests/bin
+/tests/ReportBuilder.Tests/obj
+/src/ReportBuilder.Core/obj
+/src/ReportBuilder.Core/bin
+/.vs/CopilotSnapshots
+/.vs/ReportBuilder/CopilotIndices
