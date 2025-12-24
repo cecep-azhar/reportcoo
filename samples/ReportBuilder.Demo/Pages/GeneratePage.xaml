@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ReportBuilder.Demo.Pages.GeneratePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+     <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+  </Grid.RowDefinitions>
+
+     <TextBlock Text="Generate Report" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,20"/>
+
+        <ScrollViewer Grid.Row="1">
+     <StackPanel Spacing="16" MaxWidth="800">
+     <!-- Template Selection -->
+      <ComboBox x:Name="TemplateComboBox" 
+     Header="Pilih Template" 
+   HorizontalAlignment="Stretch"
+        PlaceholderText="Pilih template..."/>
+
+      <!-- Institution Info -->
+  <TextBlock Text="Informasi Institusi" Style="{StaticResource SubtitleTextBlockStyle}"/>
+   <TextBox x:Name="InstitutionNameBox" Header="Nama Institusi" Text="RS Contoh"/>
+       <TextBox x:Name="InstitutionAddressBox" Header="Alamat" Text="Jl. Contoh No. 123"/>
+   <TextBox x:Name="InstitutionPhoneBox" Header="Telepon" Text="(021) 1234567"/>
+
+ <!-- Patient Info -->
+            <TextBlock Text="Informasi Pasien" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,20,0,0"/>
+        <TextBox x:Name="PatientNameBox" Header="Nama Pasien" Text="John Doe"/>
+     <TextBox x:Name="PatientMRNBox" Header="No. Rekam Medis" Text="RM-001234"/>
+     <CalendarDatePicker x:Name="PatientBirthDatePicker" Header="Tanggal Lahir"/>
+   <TextBox x:Name="PatientAddressBox" Header="Alamat" Text="Jl. Pasien No. 456"/>
+
+      <!-- Examination Info -->
+     <TextBlock Text="Informasi Pemeriksaan" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,20,0,0"/>
+     <TextBox x:Name="ExamNameBox" Header="Nama Pemeriksaan" Text="USG Abdomen"/>
+    <TextBox x:Name="ExamRoomBox" Header="Ruang" Text="Ruang USG 1"/>
+     <TextBox x:Name="ClinicalNotesBox" Header="Keterangan Klinis" 
+            Text="Nyeri perut kanan atas" 
+         TextWrapping="Wrap" 
+            AcceptsReturn="True" 
+        Height="80"/>
+<TextBox x:Name="ResultBox" Header="Hasil Pemeriksaan" 
+     Text="Kesan: Dalam batas normal&#x0a;Saran: Kontrol 1 bulan" 
+           TextWrapping="Wrap" 
+    AcceptsReturn="True" 
+          Height="120"/>
+
+   <!-- Doctor Info -->
+     <TextBlock Text="Informasi Dokter" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,20,0,0"/>
+         <TextBox x:Name="DoctorNameBox" Header="Nama Dokter" Text="dr. Jane Smith, Sp.Rad"/>
+         <TextBox x:Name="DoctorCredentialsBox" Header="Kredensial (SIP)" Text="SIP: 123456789"/>
+<TextBox x:Name="CityBox" Header="Kota" Text="Jakarta"/>
+
+  <!-- Images -->
+ <TextBlock Text="Gambar" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,20,0,0"/>
+    <Button x:Name="AddImagesButton" Content="Tambah Gambar..." Click="AddImagesButton_Click"/>
+    <ListView x:Name="ImagesListView" MaxHeight="200">
+<ListView.ItemTemplate>
+  <DataTemplate>
+        <Grid>
+  <TextBlock Text="{Binding}" TextTrimming="CharacterEllipsis"/>
+    </Grid>
+         </DataTemplate>
+             </ListView.ItemTemplate>
+        </ListView>
+
+            <!-- Actions -->
+       <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,20,0,0">
+    <Button x:Name="GeneratePdfButton" 
+  Content="Generate PDF" 
+       Style="{ThemeResource AccentButtonStyle}"
+        Click="GeneratePdfButton_Click"/>
+     <Button x:Name="PreviewButton" 
+  Content="Preview"
+   Click="PreviewButton_Click"/>
+       </StackPanel>
+
+   <!-- Status -->
+     <TextBlock x:Name="StatusText" Foreground="Green" TextWrapping="Wrap"/>
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

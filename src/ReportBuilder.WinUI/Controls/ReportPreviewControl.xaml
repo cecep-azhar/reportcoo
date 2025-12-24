@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ReportBuilder.WinUI.Controls.ReportPreviewControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Width="595"
+  Height="842">
+
+    <Grid x:Name="RootGrid" Background="White">
+        <!-- A4 paper simulation at 72 DPI (595 x 842 points) -->
+        <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/>
+     <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Preview -->
+        <Border x:Name="HeaderBorder" Grid.Row="0" Padding="20">
+            <Grid x:Name="HeaderGrid">
+  <Grid.ColumnDefinitions>
+       <ColumnDefinition Width="Auto"/>
+     <ColumnDefinition Width="*"/>
+   <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+
+       <!-- Left Logo -->
+      <Border x:Name="LeftLogoBorder" Grid.Column="0" 
+     Width="80" Height="80" 
+     Background="#F0F0F0" 
+ CornerRadius="4"
+       VerticalAlignment="Center"
+ Margin="0,0,10,0">
+        <TextBlock Text="Logo" 
+       HorizontalAlignment="Center" 
+   VerticalAlignment="Center"
+           Foreground="Gray"/>
+             </Border>
+
+       <!-- Header Text -->
+    <StackPanel x:Name="HeaderTextPanel" Grid.Column="0" Grid.ColumnSpan="3" 
+     HorizontalAlignment="Center" 
+     VerticalAlignment="Center"
+     Spacing="2">
+    <TextBlock x:Name="HeaderLine1" 
+   Text="Nama Institusi"
+              FontSize="14" FontWeight="Bold"
+     TextAlignment="Center"/>
+       <TextBlock x:Name="HeaderLine2" 
+      Text="Departemen"
+   FontSize="12" FontWeight="Bold"
+         TextAlignment="Center"/>
+          <TextBlock x:Name="HeaderLine3" 
+             Text="Alamat"
+  FontSize="10"
+   TextAlignment="Center"/>
+           <TextBlock x:Name="HeaderLine4" 
+   Text="Telepon"
+     FontSize="9"
+       TextAlignment="Center"/>
+   </StackPanel>
+
+       <!-- Right Logo -->
+  <Border x:Name="RightLogoBorder" Grid.Column="2" 
+        Width="80" Height="80" 
+    Background="#F0F0F0" 
+       CornerRadius="4"
+    VerticalAlignment="Center"
+   Margin="10,0,0,0">
+  <TextBlock Text="Logo" 
+        HorizontalAlignment="Center" 
+         VerticalAlignment="Center"
+        Foreground="Gray"/>
+         </Border>
+  </Grid>
+        </Border>
+
+        <!-- Header Border Line -->
+  <Border x:Name="HeaderBorderLine" Grid.Row="0" 
+      VerticalAlignment="Bottom"
+               Height="1" 
+   Background="Black"
+   Margin="20,0,20,0"/>
+
+   <!-- Content Preview -->
+        <Grid x:Name="ContentGrid" Grid.Row="1" Padding="20">
+   <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+  <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Info Fields -->
+    <Grid x:Name="InfoFieldsGrid" Grid.Row="0" Margin="0,10,0,10">
+        <Grid.ColumnDefinitions>
+     <ColumnDefinition Width="*"/>
+   <ColumnDefinition Width="20"/>
+       <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+         <!-- Left Column -->
+       <StackPanel Grid.Column="0" Spacing="4">
+      <StackPanel Orientation="Horizontal" Spacing="8">
+       <TextBlock Text="Nama Pasien" Width="100"/>
+  <TextBlock Text=":"/>
+     <TextBlock Text="[Nama Pasien]" Foreground="Gray"/>
+   </StackPanel>
+             <StackPanel Orientation="Horizontal" Spacing="8">
+           <TextBlock Text="Tanggal Lahir" Width="100"/>
+         <TextBlock Text=":"/>
+             <TextBlock Text="[Tanggal Lahir]" Foreground="Gray"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+         <TextBlock Text="No. RM" Width="100"/>
+     <TextBlock Text=":"/>
+  <TextBlock Text="[No. RM]" Foreground="Gray"/>
+          </StackPanel>
+       </StackPanel>
+
+            <!-- Right Column -->
+   <StackPanel Grid.Column="2" Spacing="4">
+               <StackPanel Orientation="Horizontal" Spacing="8">
+      <TextBlock Text="Pemeriksaan" Width="100"/>
+                <TextBlock Text=":"/>
+    <TextBlock Text="[Nama Pemeriksaan]" Foreground="Gray"/>
+  </StackPanel>
+   <StackPanel Orientation="Horizontal" Spacing="8">
+<TextBlock Text="Ket. Klinis" Width="100"/>
+    <TextBlock Text=":"/>
+   <TextBlock Text="[Keterangan]" Foreground="Gray"/>
+  </StackPanel>
+         <StackPanel Orientation="Horizontal" Spacing="8">
+        <TextBlock Text="Alamat" Width="100"/>
+                <TextBlock Text=":"/>
+      <TextBlock Text="[Alamat]" Foreground="Gray"/>
+     </StackPanel>
+   </StackPanel>
+         </Grid>
+
+        <!-- Image Grid -->
+            <Grid x:Name="ImageGridContainer" Grid.Row="1" Margin="0,10,0,10">
+            <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+           <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+       <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+         <Border Grid.Row="0" Grid.Column="0" Margin="5" Background="#F5F5F5" CornerRadius="4">
+          <TextBlock Text="Gambar 1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
+        </Border>
+  <Border Grid.Row="0" Grid.Column="1" Margin="5" Background="#F5F5F5" CornerRadius="4">
+            <TextBlock Text="Gambar 2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
+      </Border>
+            <Border Grid.Row="1" Grid.Column="0" Margin="5" Background="#F5F5F5" CornerRadius="4">
+        <TextBlock Text="Gambar 3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
+          </Border>
+         <Border Grid.Row="1" Grid.Column="1" Margin="5" Background="#F5F5F5" CornerRadius="4">
+      <TextBlock Text="Gambar 4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray"/>
+    </Border>
+            </Grid>
+
+            <!-- Results Section -->
+            <StackPanel x:Name="ResultsPanel" Grid.Row="2" Margin="0,10,0,0">
+                <TextBlock Text="Hasil Pemeriksaan :" FontWeight="Bold"/>
+        <TextBlock Text="[Hasil pemeriksaan akan ditampilkan di sini]" 
+         Foreground="Gray" 
+           TextWrapping="Wrap"
+  Margin="0,5,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Footer Preview -->
+     <Grid x:Name="FooterGrid" Grid.Row="2" Padding="20">
+ <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="2*"/>
+     <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+            <!-- Signature Block -->
+       <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+    <TextBlock x:Name="DateLocationText" Text="Kota, 01 Januari 2024" TextAlignment="Center"/>
+          <TextBlock Text="Dokter Pemeriksa" TextAlignment="Center"/>
+           <Border Height="60"/>
+       <TextBlock x:Name="DoctorNameText" Text="[Nama Dokter]" TextAlignment="Center" Foreground="Gray"/>
+      </StackPanel>
+   </Grid>
+    </Grid>
+</UserControl>

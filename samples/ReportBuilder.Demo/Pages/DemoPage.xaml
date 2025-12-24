@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ReportBuilder.Demo.Pages.DemoPage"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="20">
+      <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+     <StackPanel Grid.Row="0" Spacing="8">
+  <TextBlock Text="Quick Demo" Style="{StaticResource TitleTextBlockStyle}"/>
+    <TextBlock Text="Demonstrasi cepat pembuatan PDF dengan template default" 
+  TextWrapping="Wrap" 
+         Foreground="Gray"/>
+ </StackPanel>
+
+        <StackPanel Grid.Row="1" Spacing="16" VerticalAlignment="Center" HorizontalAlignment="Center">
+  <Button x:Name="QuickGenerateButton" 
+      Content="Generate Sample PDF" 
+          Style="{ThemeResource AccentButtonStyle}"
+   Width="250" Height="50"
+         Click="QuickGenerateButton_Click"/>
+
+      <Button x:Name="OpenFolderButton"
+       Content="Open Output Folder"
+    Width="250"
+  Click="OpenFolderButton_Click"/>
+
+  <TextBlock x:Name="StatusText" 
+         TextWrapping="Wrap"
+ TextAlignment="Center"
+       MaxWidth="500"/>
+
+  <ProgressRing x:Name="LoadingRing" IsActive="False"/>
+     </StackPanel>
+    </Grid>
+</Page>

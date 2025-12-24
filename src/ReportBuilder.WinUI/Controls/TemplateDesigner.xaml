@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ReportBuilder.WinUI.Controls.TemplateDesigner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ReportBuilder.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+  <ColumnDefinition Width="280" MinWidth="200"/>
+            <ColumnDefinition Width="Auto"/>
+    <ColumnDefinition Width="*" MinWidth="400"/>
+      <ColumnDefinition Width="Auto"/>
+   <ColumnDefinition Width="300" MinWidth="250"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel: Section Tree & Template List -->
+        <Grid Grid.Column="0">
+  <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+       <RowDefinition Height="*"/>
+ <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Template Selector -->
+            <StackPanel Grid.Row="0" Spacing="8" Padding="12">
+   <TextBlock Text="Templates" Style="{StaticResource SubtitleTextBlockStyle}"/>
+<ComboBox x:Name="TemplateComboBox" 
+      HorizontalAlignment="Stretch"
+        PlaceholderText="Pilih template..."
+        SelectionChanged="TemplateComboBox_SelectionChanged"/>
+          <StackPanel Orientation="Horizontal" Spacing="4">
+            <Button x:Name="NewTemplateButton" Content="Baru" Click="NewTemplateButton_Click"/>
+          <Button x:Name="DuplicateTemplateButton" Content="Duplikat" Click="DuplicateTemplateButton_Click"/>
+  <Button x:Name="DeleteTemplateButton" Content="Hapus" Click="DeleteTemplateButton_Click"/>
+                </StackPanel>
+        </StackPanel>
+
+    <!-- Section Tree -->
+   <Border Grid.Row="1" Background="{ThemeResource LayerFillColorDefaultBrush}" 
+   CornerRadius="8" Margin="8" Padding="12">
+            <TreeView x:Name="SectionTreeView" 
+        SelectionMode="Single"
+         ItemInvoked="SectionTreeView_ItemInvoked">
+          <TreeView.RootNodes>
+      <TreeViewNode Content="Pengaturan Halaman" IsExpanded="True">
+        <TreeViewNode.Children>
+    <TreeViewNode Content="Ukuran Kertas" Tag="PageSize"/>
+      <TreeViewNode Content="Margin" Tag="Margins"/>
+  </TreeViewNode.Children>
+   </TreeViewNode>
+      <TreeViewNode Content="Header" IsExpanded="True">
+     <TreeViewNode.Children>
+    <TreeViewNode Content="Logo Kiri" Tag="LeftLogo"/>
+        <TreeViewNode Content="Logo Kanan" Tag="RightLogo"/>
+      <TreeViewNode Content="Teks Header" Tag="HeaderLines"/>
+           </TreeViewNode.Children>
+   </TreeViewNode>
+     <TreeViewNode Content="Konten" IsExpanded="True">
+     <TreeViewNode.Children>
+  <TreeViewNode Content="Info Pasien" Tag="InfoFields"/>
+<TreeViewNode Content="Grid Gambar" Tag="ImageGrid"/>
+   <TreeViewNode Content="Hasil Pemeriksaan" Tag="Results"/>
+         </TreeViewNode.Children>
+            </TreeViewNode>
+          <TreeViewNode Content="Footer" IsExpanded="True">
+          <TreeViewNode.Children>
+       <TreeViewNode Content="Tanggal &amp; Lokasi" Tag="DateLocation"/>
+      <TreeViewNode Content="Tanda Tangan" Tag="Signature"/>
+         </TreeViewNode.Children>
+      </TreeViewNode>
+         </TreeView.RootNodes>
+ </TreeView>
+          </Border>
+
+       <!-- Action Buttons -->
+    <StackPanel Grid.Row="2" Spacing="8" Padding="12">
+          <Button x:Name="SaveTemplateButton" 
+             Content="Simpan Template" 
+          Style="{ThemeResource AccentButtonStyle}" 
+         HorizontalAlignment="Stretch"
+   Click="SaveTemplateButton_Click"/>
+                <Button x:Name="ExportTemplateButton" 
+             Content="Ekspor Template" 
+                HorizontalAlignment="Stretch"
+   Click="ExportTemplateButton_Click"/>
+  </StackPanel>
+        </Grid>
+
+        <GridSplitter Grid.Column="1" Width="8" ResizeBehavior="PreviousAndNext"/>
+
+        <!-- Center: Live Preview -->
+        <Border Grid.Column="2" 
+       Background="{ThemeResource SolidBackgroundFillColorSecondaryBrush}" 
+        CornerRadius="8" Margin="8">
+   <Grid>
+        <Grid.RowDefinitions>
+         <RowDefinition Height="Auto"/>
+             <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+       <!-- Preview Controls -->
+              <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8" Padding="12">
+ <TextBlock Text="Preview" Style="{StaticResource SubtitleTextBlockStyle}" VerticalAlignment="Center"/>
+       <Slider x:Name="ZoomSlider" 
+     Width="150" 
+                 Minimum="50" Maximum="150" Value="100"
+              ValueChanged="ZoomSlider_ValueChanged"/>
+  <TextBlock x:Name="ZoomLabel" Text="100%" VerticalAlignment="Center"/>
+    <Button x:Name="RefreshPreviewButton" Content="&#xE72C;" FontFamily="Segoe MDL2 Assets" 
+      Click="RefreshPreviewButton_Click" ToolTipService.ToolTip="Refresh Preview"/>
+             </StackPanel>
+
+     <!-- Preview Area -->
+                <ScrollViewer Grid.Row="1" 
+     HorizontalScrollBarVisibility="Auto" 
+   VerticalScrollBarVisibility="Auto"
+      ZoomMode="Enabled"
+      MinZoomFactor="0.5"
+   MaxZoomFactor="2">
+  <Border x:Name="PreviewBorder" 
+         Background="White" 
+   BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+      BorderThickness="1"
+             HorizontalAlignment="Center"
+       VerticalAlignment="Top"
+         Margin="20">
+            <local:ReportPreviewControl x:Name="PreviewControl"/>
+              </Border>
+    </ScrollViewer>
+            </Grid>
+        </Border>
+
+  <GridSplitter Grid.Column="3" Width="8" ResizeBehavior="PreviousAndNext"/>
+
+  <!-- Right Panel: Property Editor -->
+<Border Grid.Column="4" 
+           Background="{ThemeResource LayerFillColorDefaultBrush}" 
+        CornerRadius="8" Margin="8" Padding="12">
+          <Grid>
+           <Grid.RowDefinitions>
+    <RowDefinition Height="Auto"/>
+             <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+       <TextBlock x:Name="PropertyPanelTitle" 
+                  Grid.Row="0" 
+          Text="Properties" 
+         Style="{StaticResource SubtitleTextBlockStyle}"
+            Margin="0,0,0,12"/>
+
+                <Frame x:Name="PropertyEditorFrame" Grid.Row="1"/>
+          </Grid>
+        </Border>
+    </Grid>
+</UserControl>
